@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="cadastrarFuncionario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nome" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codigoFunc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cpf" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="identidade" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="passaporte" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="numOutroDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="descricaoOutroDocumento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="perfil" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="cargo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataNascimento" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataAssuncaoCargo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataAdmissao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codigoEmpresa" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="dataDemissao" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="loginDestinatario" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="emailDestinatario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="cadastrarFuncionarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cadastrarFuncionarioResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PersonalAuthentication" type="tns:PersonalAuthentication" />
+      <s:complexType name="PersonalAuthentication">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="cadastrarFuncionarioSoapIn">
+    <wsdl:part name="parameters" element="tns:cadastrarFuncionario" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarFuncionarioSoapOut">
+    <wsdl:part name="parameters" element="tns:cadastrarFuncionarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="cadastrarFuncionarioPersonalAuthentication">
+    <wsdl:part name="PersonalAuthentication" element="tns:PersonalAuthentication" />
+  </wsdl:message>
+  <wsdl:portType name="CadastroFuncionarioSoap">
+    <wsdl:operation name="cadastrarFuncionario">
+      <wsdl:input message="tns:cadastrarFuncionarioSoapIn" />
+      <wsdl:output message="tns:cadastrarFuncionarioSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CadastroFuncionarioSoap" type="tns:CadastroFuncionarioSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="cadastrarFuncionario">
+      <soap:operation soapAction="http://tempuri.org/cadastrarFuncionario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:cadastrarFuncionarioPersonalAuthentication" part="PersonalAuthentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CadastroFuncionarioSoap12" type="tns:CadastroFuncionarioSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="cadastrarFuncionario">
+      <soap12:operation soapAction="http://tempuri.org/cadastrarFuncionario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:cadastrarFuncionarioPersonalAuthentication" part="PersonalAuthentication" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CadastroFuncionario">
+    <wsdl:port name="CadastroFuncionarioSoap" binding="tns:CadastroFuncionarioSoap">
+      <soap:address location="http://localhost:59132/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="CadastroFuncionarioSoap12" binding="tns:CadastroFuncionarioSoap12">
+      <soap12:address location="http://localhost:59132/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

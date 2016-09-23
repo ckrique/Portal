@@ -1,0 +1,71 @@
+﻿@model IList<Portal.Models.Handle.FuncionarioHandle>
+@{
+    ViewBag.Title = "Tables";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int contadorControle = 0;
+}
+
+<form action="~/Home/Tables" method="post">
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Funcionários por cargo</h1>
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Relatório de funcionários por Cargo
+                </div>
+                <div class="form-inline" style="padding-left:15px; padding-top:10px;">
+                    <label style=" display: inline;">Data Inicial</label>
+                    <input class="form-control glyphicon-calendar" placeholder="dd/mm/aaaa" name="strDataInicial">
+                    <button type="submit" class="btn btn-default" id="btnFiltrar">Filtrar</button>
+                </div>
+
+                <!-- /.panel-heading -->
+                <div class="panel-body">
+                    <div class="dataTable_wrapper">
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                            <thead>
+                                <tr>
+                                    <th>Nome</th>
+                                    <th>Cargo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var funcionario in Model)
+                                {
+                                    if (contadorControle % 2 == 0)
+                                    {
+                                        <tr class="odd gradeX">
+                                            <td>@funcionario.nome</td>
+                                            <td>@funcionario.cargo</td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="even gradeX">
+                                            <td>@funcionario.nome</td>
+                                            <td>@funcionario.cargo</td>
+                                        </tr>
+                                    }
+
+                                    contadorControle++;
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+
+                </div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+        </div>
+        <!-- /.col-lg-12 -->
+    </div>
+</form>
